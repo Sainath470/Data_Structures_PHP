@@ -4,11 +4,22 @@ class Queue {
     private $limit;
     private $queue;
 
+    /**
+     * initializing the variables
+     *
+     * @param  $limit size of the queue
+     * @param $queue making as the array
+     */
     public function __construct($limit = 20){
         $this->limit = $limit;
         $this->queue = [];
     }
 
+    /**
+     * functions deletes the element at the beginnig of the Queue
+     *
+     * @return void
+     */
     public function dequeue()  {
         if($this->isEmpty()){
             echo "Queue is empty\n";
@@ -17,6 +28,12 @@ class Queue {
         }
     }
 
+    /**
+     * adds the element at the end of the queue
+     *
+     * @param [type] $newItem
+     * @return void
+     */
     public function enqueue($newItem){
         if($this->isFull() < $this->limit){
             array_push($this->queue, $newItem);
