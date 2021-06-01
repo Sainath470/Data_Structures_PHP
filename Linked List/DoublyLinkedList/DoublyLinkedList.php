@@ -10,6 +10,13 @@ class DoublyLinkedList {
         $this->tail = NULL;
     }
 
+    /**
+     * function to add node to the linked list
+     *
+     * @param $data is the input data stored in the newNode of the linked list 
+     * and added to the list
+     * @return void
+     */
     public function addNode($data){
         $newNode = new ListNode($data);
 
@@ -28,6 +35,13 @@ class DoublyLinkedList {
 
     }
 
+    /**
+     * search the input element and removes the element
+     * from the linked list
+     *
+     * @param  $element is the data that will be removed from the list
+     * @return void
+     */
     function searchAndDelete($element){
         $current = $this->head;
         if($current != NULL && $current->data == $element){
@@ -43,13 +57,18 @@ class DoublyLinkedList {
 			echo "$element is not present in the list \n";
 			return;
 		}
-		
 		$temp = $current->data;
 		$pre->next = $current->next;
 		echo $temp . " has succesfully deleted from the list\n";
     }
 
 
+    /**
+     * function to count the total number of
+     * nodes present in the linked list
+     *
+     * @return void
+     */
     function countNodes(){
 		$count = 0;
 		$current = $this->head;
@@ -60,6 +79,12 @@ class DoublyLinkedList {
 		return $count;
 	}
 
+    /**
+     * displays the entire linked list from head to tail
+     * along with total number of nodes
+     *
+     * @return void
+     */
     public function display(){
         echo "Total Nodes: " .$this -> countNodes() . "\n";
         $currentNode = $this -> head;
@@ -71,7 +96,12 @@ class DoublyLinkedList {
         }
     }
 
-    
+
+    /**
+     * deletes the element in the beginnig of the list
+     *
+     * @return void
+     */
     public function deleteFirst(){
         if($this-> head != NULL){
             if($this->head->next != NULL){
@@ -83,6 +113,11 @@ class DoublyLinkedList {
         }
     }
 
+    /**
+     * deletes the element at the end of the linked list
+     *
+     * @return void
+     */
     public function deleteLast(){
         if($this-> head!= NULL){
             $currentNode = $this->head;
@@ -101,7 +136,14 @@ class DoublyLinkedList {
     }
 }
 
+/**
+ * creating object 
+ */
 $doublyLinkedList = new DoublyLinkedList();
+
+/**
+ * calling the addNode function through object
+ */
 $doublyLinkedList->addNode(10);
 $doublyLinkedList->addNode(12);
 $doublyLinkedList->addNode(13);
@@ -110,6 +152,9 @@ $doublyLinkedList->addNode(18);
 
 $doublyLinkedList->searchAndDelete(18);
 
+/**
+ * calling the display function.
+ */
 $doublyLinkedList->display();
 
 

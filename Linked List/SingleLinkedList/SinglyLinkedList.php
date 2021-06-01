@@ -97,7 +97,6 @@ class SinglyLinkedList{
 		$current = $this->head;
 		$index = null; 
 		$temp = null;
-
 		if($this->head == NULL){
 			return "list is empty";
 		}else{
