@@ -6,7 +6,7 @@ class ListNode{
     public $priority = NULL;
 
 
-    function __construct($data = NULL, $priority = NULL){
+    function __construct($data, $priority){
         $this->data = $data;
         $this->priority = $priority;
     }

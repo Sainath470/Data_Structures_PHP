@@ -1,83 +1,115 @@
 <?php
 include("ListNode.php");
 class DoublyLinkedList {
-    private $firstNode = NULL;
-    private $lastNode = NULL;
+    private $head;
+    private $tail;
     private $totalNode = 0;
 
-    public function insert($data = NULL){
+    function __construct(){
+        $this->head = NULL;
+        $this->tail = NULL;
+    }
+
+    public function addNode($data){
         $newNode = new ListNode($data);
 
-        if($this -> firstNode === NULL){
-            $this -> firstNode = &$newNode;
+        if($this->head == NULL){
+            $this->head = $this->tail = $newNode;
+            $this->head->pre = NULL;
+            $this->tail->next = NULL;
+            $this->totalNode++;
         }else{
-            $currentNode = $this -> firstNode;
-            while($currentNode -> next != NULL){
-                $currentNode = $currentNode -> next;
-            }
-            $currentNode -> next = $newNode;
+            $this->tail->next = $newNode;
+            $newNode->pre = $this->tail;
+            $this->tail = $newNode;
+            $this->tail->next = NULL;
+            $this->totalNode++;
         }
-        $this -> totalNode++;
-        return TRUE;
+
+    }
+
+    function searchAndDelete($element){
+        $current = $this->head;
+        if($current != NULL && $current->data == $element){
+            $this->head = $current->next;
+            return;
+        }
+
+        while($current != NULL && $current->data != $element){
+			$pre = $current;
+			$current = $current->next;
+		}
+		if($current == NULL){
+			echo "$element is not present in the list \n";
+			return;
+		}
+		
+		$temp = $current->data;
+		$pre->next = $current->next;
+		echo $temp . " has succesfully deleted from the list\n";
     }
 
 
+    function countNodes(){
+		$count = 0;
+		$current = $this->head;
+		while($current != NULL){
+			$count++;
+			$current = $current->next;
+		}
+		return $count;
+	}
+
     public function display(){
-        echo "\nTotal Nodes: " .$this -> totalNode . "\n";
-        $currentNode = $this -> firstNode;
+        echo "Total Nodes: " .$this -> countNodes() . "\n";
+        $currentNode = $this -> head;
         while($currentNode != NULL){
-            echo $currentNode -> data . " ";
+            echo $currentNode -> data;
+            if($currentNode->next != NULL)
+            echo "->";
             $currentNode = $currentNode -> next;
         }
     }
 
     
     public function deleteFirst(){
-        if($this-> firstNode != NULL){
-            if($this->firstNode->next != NULL){
-                $this->firstNode = $this->firstNode->next;
+        if($this-> head != NULL){
+            if($this->head->next != NULL){
+                $this->head = $this->head->next;
             }else{
-                $this->firstNode = NULL;
+                $this->head = NULL;
             }
             $this->totalNode--;
-            return TRUE;
         }
-        return FALSE;
     }
 
     public function deleteLast(){
-        if($this-> firstNode!= NULL){
-            $currentNode = $this->firstNode;
+        if($this-> head!= NULL){
+            $currentNode = $this->head;
             if($currentNode->next === Null){
-                $this->firstNode = NULL;
+                $this->head = NULL;
             }else{
-                $previous = NULL;
-
+                $pre = NULL;
                 while($currentNode->next != NULL){
-                    $previous = $currentNode;
+                    $pre = $currentNode;
                     $currentNode = $currentNode->next;
                 }
-
-                $previous->next =NULL;
+                $pre->next =NULL;
                 $this->totalNode--;
-                return TRUE;
             }
         }
-        return FALSE;
     }
-
-  
 }
 
 $doublyLinkedList = new DoublyLinkedList();
-$doublyLinkedList->insert(10);
-$doublyLinkedList->insert(12);
-$doublyLinkedList->insert(13);
+$doublyLinkedList->addNode(10);
+$doublyLinkedList->addNode(12);
+$doublyLinkedList->addNode(13);
+$doublyLinkedList->addNode(15);
+$doublyLinkedList->addNode(18);
 
-$doublyLinkedList->display();
-$doublyLinkedList->deleteLast();
-$doublyLinkedList->display();
-$doublyLinkedList->deleteFirst();
+$doublyLinkedList->searchAndDelete(18);
+
 $doublyLinkedList->display();
 
 

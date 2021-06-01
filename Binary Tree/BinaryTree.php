@@ -9,37 +9,41 @@ class BinaryTree{
         $this->root = $node;
     }
 
-    public function traverse( $node,  $level = 0){
-        if($node){
-            echo str_repeat("-", $level);
-            echo $node->data . "\n";
-
-            if($node->left)
-            $this->traverse($node->left, $level +1);
-
-            if($node->right)
-            $this->traverse($node->right, $level + 1);
-        }
-    }
+    public function displayTree($node, $space=0) {  
+        $count = 10 ;
+        if($node == NULL)
+        return;
+        $space += $count;
+        $this->displayTree($node->right, $space);
+        echo "\n";
+        for( $i = $count; $i < $space; $i++)
+             echo " ";
+           
+            echo "$node->data";
+        $this->displayTree($node->left, $space);
+    }    
 }
-$final = new BinaryNode("Final");
 
-$tree = new BinaryTree($final);
+$parent = new BinaryNode(1);
+
+$tree = new BinaryTree($parent);
 
 
-$semiFinal1 = new BinaryNode("Semi Final 1");
-$semiFinal2 = new BinaryNode("Semi Final 2");
+$child1 = new BinaryNode(2);
+$child2 = new BinaryNode(3);
 
-$quaterFinal1 = new BinaryNode("Quarter Final 1");
-$quaterFinal2 = new BinaryNode("Quarter Final 2");
-$quaterFinal3 = new BinaryNode("Quarter Final 3");
-$quaterFinal4 = new BinaryNode("Quarter Final 4");
+$leftOffChild1 = new BinaryNode(4);
+$rightOffChild1 = new BinaryNode(5);
+$leftOffChild2 = new BinaryNode(6);
+$rightOffChild2 = new BinaryNode(7);
 
-$semiFinal1->addChild($quaterFinal1 , $quaterFinal2);
-$semiFinal2->addChild($quaterFinal3, $quaterFinal4);
 
-$final->addChild($semiFinal1, $semiFinal2);
+$child1->addChild($leftOffChild1 , $rightOffChild1);
+$child2->addChild($leftOffChild2, $rightOffChild2);
 
-$tree->traverse($tree->root);
+$parent->addChild($child1, $child2);
+
+
+$tree->displayTree($tree->root);
 
 ?>

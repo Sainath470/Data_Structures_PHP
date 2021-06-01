@@ -6,11 +6,11 @@ class PriorityQueue{
     private $firstNode = NULL;
     private $previous = NULL;
 
-    public function enqueue($data = NULL, $priority = NULL){
+    public function enqueue($data, $priority = NULL){
         $listNode = new ListNode($data, $priority);
         $this->totalNode++;
 
-        if($this->firstNode === NULL){
+        if($this->firstNode == NULL){
             $this->firstNode = &$listNode;
         }else{
             $previous = $this->firstNode;
@@ -44,11 +44,11 @@ class PriorityQueue{
 
 }
 
-$priorityQueue = new PriorityQueue(10);
-$priorityQueue->enqueue("Adam", 1);
-$priorityQueue->enqueue("kris", 8);
-$priorityQueue->enqueue("morris", 2);
-$priorityQueue->enqueue("gill", 8);
+$priorityQueue = new PriorityQueue();
+$priorityQueue->enqueue("Adam", 10);
+$priorityQueue->enqueue("kris", 4);
+$priorityQueue->enqueue("morris", 5);
+$priorityQueue->enqueue("gill", 7);
 
 $priorityQueue->display();
 
